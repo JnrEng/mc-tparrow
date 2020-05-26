@@ -249,6 +249,7 @@ You should now be able to open up your Minecraft world, `Teleport`.
 
 That's it! You've now got an arrow that will teleport you to wherever it lands.
 
-**Congratulations on completing the Teleportation Arrow!**
+If you want to take it further, you could try:
 
-Make sure to **save your file in the correct location and test your mod**.
+* Teleporting another (random) player
+* Teleporting nearby mobs with the player
