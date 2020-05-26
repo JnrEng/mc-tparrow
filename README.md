@@ -4,7 +4,7 @@ In this course, we will explore how we can edit the outcome of an arrow being fi
 
 ## You will need
 
-* A text editor - such as Visual Studio Code
+* A text editor
 * A copy of Minecraft: Java Edition
 
 ## Prerequisites
