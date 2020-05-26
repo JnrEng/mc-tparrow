@@ -245,6 +245,11 @@ You should now be able to open up your Minecraft world, `Teleport`.
 
 *And test your new mod. Shoot water, lava, ground and mobs to test.*
 
-**Congratulations on completing the Teleportation Arrow!**
+## Done
 
-Make sure to **save your file in the correct location and test your mod**.
+That's it! You've now got an arrow that will teleport you to wherever it lands.
+
+If you want to take it further, you could try:
+
+* Teleporting another (random) player
+* Teleporting nearby mobs with the player
