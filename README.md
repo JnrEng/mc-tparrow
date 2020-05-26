@@ -39,17 +39,62 @@ There are two properties in the `pack` object of this file:
 
 Moving forward, we need to understand *namespaces*. A namespace is a domain for a particular set of contents, which prevent things with the same name from interfering with each other. For example, if a mod adds a new type of furnace with the block ID *furnace*, Minecraft would find a conflict between the default furnace and our new one with the same name — and the game breaks. When we use different namespaces for the mod and the vanilla furnace, the blocks become *minecraft:furnace* and *mod:furnace*, which no longer conflicts.
 
-**In your data pack, create a new folder called `data`. In this folder, create a new folder with the name `snow_bow`.** Namespace names can only include numbers, lowercase letters, underscores and the hyphen/minus symbol. The convention for namespaces and names is `snake_case`. This means that all words are in lower case, and spaces are created with underscores.
+**In your data pack, create a new folder called `data`. In this folder, create a new folder with the name `tp_arrow`.** Namespace names can only include numbers, lowercase letters, underscores and the hyphen/minus symbol. The convention for namespaces and names is `snake_case`. This means that all words are in lower case, and spaces are created with underscores.
 
-## Part 2: Functions and Tags
+## Part 2: Creating Functions
 
-We have created the framework for our Teleportation Arrow, now we need to fill out the body of the code to tell the program what we need it to do.
+In Minecraft, *functions* are a way to group several commands together and run them all at once. Instead of typing each command into the chat window or chaining them together using command blocks, we can write each command as a line in a text file and add them to our game using data packs.
 
-Firstly, we will fill out the `minecraft`.
+We can define new functions by creating `.mcfunction` files. **In your namespace folder (`tp_arrow`), create a new sub-folder called `functions`.** This is where we can add our functions. These follow the same naming rules for namespaces.
 
-* In `minecraft` we have to create a new folder named `tags`. *Tags* are used by Minecraft to group like things together. They can group items, blocks and more.
-* In `tags`, we then create a new folder called `functions`. In Minecraft, *functions* are a way to group several commands together and run them all at once. Instead of typing each command into the chat window or chaining them together using command blocks, we can write each command as a line in a text file and add them to our game using data packs.
-* Lastly we need to create a new File using our text editor, we will call it `tick.json`. Inside `tick.json` input the following code.
+To create a teleporting arrow, we need to tell every arrow that's landed in the ground to execute a `teleport` command whenever an arrow lands in the ground. Instead of making this work for all arrows, we're just going to give spectral arrows teleportation powers. Minecraft enables this functionality through the `execute` command. We'll build our command bit by bit.
+
+Our data pack will work by checking if there are any arrows in the ground once per *game tick*. To start, we'll make a new function in our namespace that we want to run every tick. **In the `tp_arrow` folder, create a `functions` sub-folder, and add a new file called `tick.mcfunction`.**
+
+**In `tick.mcfunction`, type `execute`.** Note that functions do not use slashes at the start of commands. We want to run our command *as* a landed arrow, so we can add the `as` keyword next. **Add `as` to your command.**
+
+We want to target arrows that are in the ground. To do this, we use `@e`, which is a *target selector* meaning *a*ll *e*ntities. **Add `@e` to your command.** 'Entities' are any object in Minecraft that isn't a block. For example, items, players, and animals are all entities.
+
+We can limit our selection by using *target selector arguments*. We add these inside square brackets after the selector. the `type` selector can target entites like `zombie`, `ender_dragon` or `item`. We want to target spectral arrows, so **add `[type=minecraft:spectral_arrow]` right after the `@e`.**
+
+We can also look at the *NBT data* of entities. This stores extra information about the entity. For example, chests use NBT data to store what items they hold and the direction they're facing. For arrows, the `inGround` NBT tag stores wether or not the arrow is in the ground.
+
+We can target only these arrows by adding `nbt={inGround:1b}` to our target selector arguments, separated from the type argument by a comma. 0 means that the arrow is in the air, while 1 means that the arrow is in the ground. the `b` indicates that this is a *binary number*, meaning it has two values.  The [Minecraft Wiki](https://minecraft.gamepedia.com/) lists the NBT data for different entities and blocks. **Add `,nbt={inGround:1b}` to your command, inside the square brackets.** Your code should look like this:
+
+```mcfunction
+execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}]
+```
+
+We've added an `execute` command that will run at every spectral arrow that's landed in the ground. Now, we need to add the command we want to run at the spot where that arrow lands.
+
+We used `@e` as a target selector for all entities. Now we want to use the target selector for *nearest player*, which is `@p`. We'll tell the nearest player to the arrow to teleport themseles to that location. **Add `as @p` to your command** to execute it *as* the player. By default, the player will be telported facing the same way as the arrow. We can keep the player's rotation using the `rotated as` argument. **Add `rotated as @p` to your command.** Your code should look like this:
+
+```mcfunction
+execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @p rotated as @p
+```
+
+Now we can add the command to execute. **Add `run tp ~ ~ ~` to your command.** This will tell the player to *run* the `tp` (teleport) command, and teleport them to the *execution location*. We know from earlier that this location is the arrow, since we specified it with the `at` keyword. Your code should looks like this:
+
+```mcfunction
+execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @p rotated as @p run tp ~ ~ ~
+```
+
+If we used this function right now, Minecraft would telport the player every tick until the arrow despawned.  We need to make sure we remove the arrow after we've teleported the player.
+
+To do this, we can get the arrow to execute the `kill` command on the same tick. We've already written the code to select our arrow, so **copy-and-paste the command from line 1 onto a new line.** We can just change the command at the end of the line. **Remove `as @p rotated as @p run tp ~ ~ ~` from the end of the second command, and replace it with `as @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] run kill @s`.** The `as` keyword makes sure we're telling the arrow to destroy itself (instead of the player), and the `@s` selector targets the *executor* of the command — in this case, it's the arrow that we selected with the `as` keyword. Your code should look like this:
+
+```mcfunction
+execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @p rotated as @p run tp ~ ~ ~
+execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] run kill @s
+```
+
+## Part 3: Overriding Tags
+
+We've finished our function, but we need to tell Minecraft that we want it to run every game tick. To do this, we can add our function to the built-in `tick` tag. *Tags* are used by Minecraft to group like things together. They can group items, blocks and more. Functions or commands that we list in this tag will run once every game tick.
+
+**In your data pack folder, create a new folder called `minecraft`.** Items we put in this folder wil override any built-in resources. We're going to override the `tick` tag. Any functions that are part of this tag will run once per game tick.
+
+To do this, we need to add a new definition for the `tick` tag in the `minecraft` namespace. **In the `minecraft` folder, create a new sub-folder called `tags`, with a sub-folder in that called `functions`. Create a new file in this folder called `tick.json`.** The file follows this format:
 
  ```json
  {
@@ -59,148 +104,55 @@ Firstly, we will fill out the `minecraft`.
 }
 ```
 
-Be sure to **save your progress to the correct location**.
+**Copy this code into `pack.mcmeta`.**
 
-We need to work on the contents of `tp_arrow`, so navigate back to `data` and then `tp_arrow`.
+Minecraft reads our data packs once when we load a world. Any changes we make after that won't be seen until we close and re-open the world or use the `/reload` command. **Save the files, then go back to your game and type `/reload` into the chat window.** You should see the message `Reloading!` appear. **Now, try shooting a spectral arrow.** When the arrow lands, it should teleport the nearest player to the location where it landed, and then disappear.
 
-* Create a new folder inside `tp_arrow` called `functions`.
-* In our new functions folder we need to create a new file using our text editor called `tick.mcfunction`. This file will contain the majority of our code.
+## Part 4: Fixing Arrow Behaviour
 
-## Part 3: Coding
+Our arrows work well if we shoot them at the ground or a wall, but they currently don't work if we shoot a mob directly. This is because the arrow never lands if it hits a mob — it simply gives them the `minecraft:glowing` status effect, so our function doesn't target them. Because of the unique behaviour of the arrow, however, we can use this to execute our function on mobs with the glowing status effect.
 
-In `tick.mcfunction` we need to start typing our code. Note that functions do not use slashes at the start of commands. Type:
+In this section, we'll be using scoreboards to keep track of mobs. Scoreboards are an advanced feature of Minecraft that allow map makers to disaply information in different areas of the game, to target specific entities and store different kinds of data.
 
-```mcfunction
-execute
-```
+Our first step will be to make a new *objective*. Entities can gain *points* in an objective. To create a new objective, **add `scoreboard objectives add tpArrowHit dummy` to the top of `tick.mcfunction`**. This command will add a new objective called 'snowed' to our game, and make it a 'dummy' type. This means that the objective will not score anything (like monsters destroyed or blocks placed) unless we use commands to change the score. This will run every tick; if the objective already exists, Minecraft will ignore the command.
 
-We want to run our command *as* a landed arrow, so we can add the `at` keyword next. **Add `at` to your command.
+Next, we'll tell every entity to attempt to remove the glowing status effect from themselves. This will be successful if they have the glowing effect, which they can receive from being hit by a spectral arrow. If they succeed, we'll tell the entity to add themselves to the 'tpArrowHit' objective. This will make it much easier to target them later.
 
-```mcfunction
-execute at
-```
+We'll start with a new `execute` command. **In `tick.mcfunction`, add a new `execute` command to the end**. We want every entity to try to remove the status effect, so **add `as @e` to the command**. Each entity will try this at their own location, so **add `at @s` to the command**.
 
-We want to target arrows that are in the ground. To do this, we use `@e`, which is a *target selector* meaning *all entities*. 'Entities' are any object in Minecraft that isn't a block. For example, items, players, and animals are all entities.
+The `execute` command allows us to store the result of commands we run in different places. We can do this with the `store` keyword. **Add `store` to the command**. We want to store wether or not our command is successful, so the next argument will be `success`. **Add `success` to the command**.
 
-Add `@e` to your command.
+Next, we specify where we want to store the result. In our case, we want to store it in a scoreboard objective, so **add `score` to the command**. The `score` needs a `name` and an `objective` argument. For `name`, we can use the executing entity (`@s`), and for the objective, we use `tpArrowHit`, which we created earlier. **Add `@s tpArrowHit` to the command**.
 
-```mcfunction
-execute at @e
-```
+Finally, we can add the command we want each entity to attempt. To remove the glowing effect, we use the same command we used to give it, but use `clear` instead of `give`. **Add `run effect clear @s minecraft:glowing` to the command**.
 
-We can limit our selection by using *target selector arguments. We add these inside square brackets after the selector. The `type` selector can target entities like `zombie`, `ender_dragon` or `item`. We want to target spectral arrows. So add the following to your code.
+Your command should look like this:
 
 ```mcfunction
-[type=minecraft:spectral_arrow]
+execute as @e at @s store success score @s tpArrowHit run effect clear @s minecraft:glowing
 ```
 
-Your code should look like this:
+Now we have a list of entities, as a scoreboard objective, that contains all the entities which had the glowing effect. Remember that we told every entity to remove the glowing effect, so they won't glow anymore. Our last step will tell every entity with a score in `tpArrowHit` to teleport the nearest player to them.
+
+**In `tick.mcfunction`, add a new `execute` command**. We can target entities based on their scores using the `score` target selector argument. **Add `at @e[scores={tpArrowHit=1}]` to the command**.
+
+This will target every entity who has scores matching the list we provide (remember that entities can have scores for more than one objective). We specify the 'tpArrowHit' objective, then say `1`. Just like with the arrow, we want the entity to teleport the nearest player to them, so add **`as @p rotated as @p run tp ~ ~ ~` to the command**. Your command should look like this:
 
 ```mcfunction
-execute at @e[type=minecraft:spectral_arrow]
+execute at @e[scores={tpArrowHit=1}] as @p rotated as @p run tp ~ ~ ~
 ```
 
-We can also look at the *NBT data* of entities. This stores extra information about the entity. For example, chests use NBT data to store what items they hold and the direction they're facing. For arrows, the `inGround` NBT tag stores wether or not the arrow is in the ground.
-
-So we need to edit our code by adding:
+That's all we need to add. Your finished function file should look like this:
 
 ```mcfunction
-,nbt={inGround:1b}
-```
-
-**Make sure that this is inside the close `]`.**
-
-0 means that the arrow is in the air, while 1 means that the arrow is in the ground. The `b` indicates that this is a *binary number*, meaning it has two values. *The [Minecraft Wiki](https://minecraft.gamepedia.com/) lists the NBT data for different entities and blocks.*
-
-Our code should look like this:
-
-```mcfunction
-execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}
-```
-
-Now that we have identified what we are firing (`spectral_arrow`) and where it will be (`inGround`), we now need to define what will happen at that point.
-
-We used `@e` as a *target selector* for *all entities*. Now we want to use the *target selector* for *nearest player* which is `@p`. The `tp` command will give use the desired effect of teleportation. We need to add the following code for these additions of the player and teleportation to occur.
-
-```mcfunction
-as @p rotated as @p run tp ~ ~ ~
-```
-
-With the final result looking like this:
-
-```mcfunction
-execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @p rotated as @p run tp ~ ~ ~
-```
-
-**Make sure to save your work as `tick.mcfuction` in the correct location. In the `functions` folder.
-
-Now we need to run a command that will delete the arrow once our teleportation is complete. This is done by running the `kill` command in our code. We still need to define what is being removed, and when.
-
-We also need to use the *target selector* `@s` which refers to the entity executing the command (yourself). So on a new line of code in `tick.mcfunction` we need to add the following string of code.
-
-```mcfunction
-execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] run kill @s
-```
-
-With our code looking like this:
-
-```mcfunction
-execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @p rotated as @p run tp ~ ~ ~
-execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] run kill @s
-```
-
-**Save your work.**
-
-You should now be able to open up your Minecraft world, `Teleport`.
-
-* Give yourself a `Bow`
-* Give yourself a `Spectral Arrow`.
-*And test your new mod. Shoot water, lava, ground and mobs to test.*
-
-## Part 4: Working with Mobs
-
-Now, having tested your mod, you will have noticed that it does not *teleport* when you target a mob (zombies, villagers or cows).
-We need to customise our existing code to make these changes.
-
-We need to add to the beginning of our code in the `tick.mcfunction` file.
-
-Firstly we are going to use the *scoreboard objective* and *dummy* command to track which entities (mobs) have been hit by our spectral arrow. The *dummy* command determines that section can only be changed by code/commands. We will call the new *sore board* objective `tpArrowHit`.
-
-Our code will look like this:
-`scoreboard objectives add tpArrowHit dummy`
-
-Our next piece of code will be placed after all of code on line 4. We need to change our players location from the location of firing the arrow to the new location of the arrow. We will again use `execute at @e` and combine our object identifier with the new location.
-
-It will look like this:
-`execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}]`
-
-This next line tells all entities to store their result, and update their tpArrowHit scoreboard objective if they succeed in running the command to clear the glowing effect bestowed by the spectral arrow.
-
-Our code will look like this:
-`execute as @e store success score @s tpArrowHit run effect clear @s minecraft:glowing`
-
-Our last part  will set the entity to run the command as the nearest player, and will use the `rotated as` subcommand to set the rotation to the same as the nearest playeras well. This will ensure that their rotation does not change after they have teleported.
-
-This part "run tp ~ ~ ~" simply says to run the teleport command at the same relative position as the target that was already set, being the arrow.
-
-It will look like this:
-`execute at @e[scores={tpArrowHit=1}] as @p rotated as @p run tp ~ ~ ~`
-
-The final result in our fixed result should look like this:
-`scoreboard objectives add tpArrowHit dummy
+scoreboard objectives add tpArrowHit dummy
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @p rotated as @p run tp ~ ~ ~
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] run kill @s
 execute as @e at @s store success score @s tpArrowHit run effect clear @s minecraft:glowing
-execute at @e[scores={tpArrowHit=1..100}] as @p rotated as @p run tp ~ ~ ~`
+execute at @e[scores={tpArrowHit=1..100}] as @p rotated as @p run tp ~ ~ ~
+```
 
-**Save your work.**
-
-You should now be able to open up your Minecraft world, `Teleport`.
-
-* Give yourself a `Bow`
-* Give yourself a `Spectral Arrow`.
-
-*And test your new mod. Shoot water, lava, ground and mobs to test.*
+**Save your file and switch to Minecraft. Run `/reload` to load the new function then try shooting a spectral arrow at a mob.** When the arrow hits the mob, the nearest player should be teleported to the location the arrow landed at as normal.
 
 ## Done
 
