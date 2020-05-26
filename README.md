@@ -19,27 +19,23 @@ Data packs are stored in a world's `datapacks` folder as either a sub-folder or 
 
 When we're working on files in data packs, there is no need to exit your world. Just pause the game and switch to another application.
 
- Once we have created the 'data pack' we need to fill it with folders to operate the Teleportation Arrow.
-
-* Inside `TPArrow` create a new folder called `data`.
- A data pack is identified by Minecraft with a `pack.mcmeta` file that is stored in the pack.
-* With our text editor we need to create a new file called `pack.mcmeta` inside which we need the following:
+Data packs are identified by Minecraft with a `pack.mcmeta` file stored in the data pack. **Create a new file in your data pack folder called `pack.mcmeta`, where `.mcemta` is the *file extension*.** This is a JSON file that contains a description and a version number. The file follows this format:
 
 ```json
 {
     "pack": {
         "pack_format": 5,
-        "description": "Add arrows that teleport the player."
+        "description": "Add arrows that teleport the player"
     }
 }
 ```
 
-Be sure to **save your progress to the correct location**.
+There are two properties in the `pack` object of this file:
 
-There are two properties within `pack.mcmeta` that warrant definition:
+* `pack_format`, which describes the version of the data pack format that the pack uses. In this course, we're using Minecraft 1.15.2, which uses data pack version 5.
+* `description`, which is displayed when hovering over the data pack's name when using the `/datapack list` command in-game.
 
-* 'pack_format: 5' describes the version of Minecraft that we are using, which for this example should be Minecraft 1.15.2.
-* 'description' merely provides an overveiw of what our code is intended for.
+**Copy this code into `pack.mcmeta`, using a description of your choice.**
 
 Moving forward, we need to understand *namespaces*.
 A namespace is a domain for a particular set of contents, which prevent things with the same name from interfering with each
