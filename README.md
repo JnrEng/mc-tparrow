@@ -157,7 +157,7 @@ You should now be able to open up your Minecraft world, `Teleport`.
 * Give yourself a `Spectral Arrow`.
 *And test your new mod. Shoot water, lava, ground and mobs to test.*
 
-## Part 4: Fixing our code
+## Part 4: Working with Mobs
 
 Now, having tested your mod, you will have noticed that it does not *teleport* when you target a mob (zombies, villagers or cows).
 We need to customise our existing code to make these changes.
