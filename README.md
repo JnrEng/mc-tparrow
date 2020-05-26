@@ -67,10 +67,10 @@ execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}]
 
 We've added an `execute` command that will run at every spectral arrow that's landed in the ground. Now, we need to add the command we want to run at the spot where that arrow lands.
 
-We used `@e` as a *target selector* for *all entities*. Now we want to use the *target selector* for *nearest player* which is `@p`. The `tp` command will give use the desired effect of teleportation. We need to add the following code for these additions of the player and teleportation to occur.
+We used `@e` as a target selector for all entities. Now we want to use the target selector for *nearest player*, which is `@p`. We'll tell the nearest player to the arrow to teleport themseles to that location. **Add `as @p` to your command** to execute it *as* the player. By default, the player will be telported facing the same way as the arrow. We can keep the player's rotation using the `rotated as` argument. **Add `rotated as @p` to your command.** Your code should look like this:
 
 ```mcfunction
-as @p rotated as @p run tp ~ ~ ~
+execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @p rotated as @p
 ```
 
 With the final result looking like this:
