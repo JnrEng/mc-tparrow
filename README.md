@@ -41,7 +41,7 @@ Moving forward, we need to understand *namespaces*. A namespace is a domain for 
 
 **In your data pack, create a new folder called `data`. In this folder, create a new folder with the name `tp_arrow`.** Namespace names can only include numbers, lowercase letters, underscores and the hyphen/minus symbol. The convention for namespaces and names is `snake_case`. This means that all words are in lower case, and spaces are created with underscores.
 
-## Part 2: Coding
+## Part 2: Creating Functions
 
 In Minecraft, *functions* are a way to group several commands together and run them all at once. Instead of typing each command into the chat window or chaining them together using command blocks, we can write each command as a line in a text file and add them to our game using data packs.
 
@@ -88,7 +88,7 @@ execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @p rotated as 
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] run kill @s
 ```
 
-## Part 3: Functions and Tags
+## Part 3: Overriding Tags
 
 We've finished our function, but we need to tell Minecraft that we want it to run every game tick. To do this, we can add our function to the built-in `tick` tag. *Tags* are used by Minecraft to group like things together. They can group items, blocks and more. Functions or commands that we list in this tag will run once every game tick.
 
