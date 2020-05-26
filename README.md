@@ -43,16 +43,12 @@ Moving forward, we need to understand *namespaces*. A namespace is a domain for 
 
 ## Part 2: Functions and Tags
 
-We have created the framework for our Teleportation Arrow, now we need to fill out the body of the code to tell the
-program what we need it to do.
+We have created the framework for our Teleportation Arrow, now we need to fill out the body of the code to tell the program what we need it to do.
 
 Firstly, we will fill out the `minecraft`.
 
-* In `minecraft` we have to create a new folder named `tags`.
- *Tags* are used by Minecraft to group like things together. They can group items, blocks and more.
-* In `tags`, we then create a new folder called `functions`. In Minecraft, *functions* are a way to group several commands
- together and run them all at once. Instead of typing each command into the chat window or chaining them together using
- command blocks, we can write each command as a line in a text file and add them to our game using data packs.
+* In `minecraft` we have to create a new folder named `tags`. *Tags* are used by Minecraft to group like things together. They can group items, blocks and more.
+* In `tags`, we then create a new folder called `functions`. In Minecraft, *functions* are a way to group several commands together and run them all at once. Instead of typing each command into the chat window or chaining them together using command blocks, we can write each command as a line in a text file and add them to our game using data packs.
 * Lastly we need to create a new File using our text editor, we will call it `tick.json`. Inside `tick.json` input the following code.
 
  ```json
@@ -72,9 +68,7 @@ We need to work on the contents of `tp_arrow`, so navigate back to `data` and th
 
 ## Part 3: Coding
 
-In `tick.mcfunction` we need to start typing our code.
-Note that functions do not use slashes at the start of commands.
-Type:
+In `tick.mcfunction` we need to start typing our code. Note that functions do not use slashes at the start of commands. Type:
 
 ```mcfunction
 execute
@@ -86,9 +80,7 @@ We want to run our command *as* a landed arrow, so we can add the `at` keyword n
 execute at
 ```
 
-We want to target arrows that are in the ground.
-To do this, we use `@e`, which is a *target selector* meaning *all entities*.
-'Entities' are any object in Minecraft that isn't a block. For example, items, players, and animals are all entities.
+We want to target arrows that are in the ground. To do this, we use `@e`, which is a *target selector* meaning *all entities*. 'Entities' are any object in Minecraft that isn't a block. For example, items, players, and animals are all entities.
 
 Add `@e` to your command.
 
@@ -96,10 +88,7 @@ Add `@e` to your command.
 execute at @e
 ```
 
-We can limit our selection by using *target selector arguments.
-We add these inside square brackets after the selector.
-The `type` selector can target entities like `zombie`, `ender_dragon` or `item`.
-We want to target spectral arrows. So add the following to your code.
+We can limit our selection by using *target selector arguments. We add these inside square brackets after the selector. The `type` selector can target entities like `zombie`, `ender_dragon` or `item`. We want to target spectral arrows. So add the following to your code.
 
 ```mcfunction
 [type=minecraft:spectral_arrow]
@@ -111,10 +100,7 @@ Your code should look like this:
 execute at @e[type=minecraft:spectral_arrow]
 ```
 
-We can also look at the *NBT data* of entities.
-This stores extra information about the entity.
-For example, chests use NBT data to store what items they hold and the direction they're facing.
-For arrows, the `inGround` NBT tag stores wether or not the arrow is in the ground.
+We can also look at the *NBT data* of entities. This stores extra information about the entity. For example, chests use NBT data to store what items they hold and the direction they're facing. For arrows, the `inGround` NBT tag stores wether or not the arrow is in the ground.
 
 So we need to edit our code by adding:
 
@@ -124,9 +110,7 @@ So we need to edit our code by adding:
 
 **Make sure that this is inside the close `]`.**
 
-0 means that the arrow is in the air, while 1 means that the arrow is in the ground.
-The `b` indicates that this is a *binary number*, meaning it has two values.
-*The [Minecraft Wiki](https://minecraft.gamepedia.com/) lists the NBT data for different entities and blocks.*
+0 means that the arrow is in the air, while 1 means that the arrow is in the ground. The `b` indicates that this is a *binary number*, meaning it has two values. *The [Minecraft Wiki](https://minecraft.gamepedia.com/) lists the NBT data for different entities and blocks.*
 
 Our code should look like this:
 
@@ -136,10 +120,7 @@ execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}
 
 Now that we have identified what we are firing (`spectral_arrow`) and where it will be (`inGround`), we now need to define what will happen at that point.
 
-We used `@e` as a *target selector* for *all entities*.
-Now we want to use the *target selector* for *nearest player* which is `@p`.
-The `tp` command will give use the desired effect of teleportation.
-We need to add the following code for these additions of the player and teleportation to occur.
+We used `@e` as a *target selector* for *all entities*. Now we want to use the *target selector* for *nearest player* which is `@p`. The `tp` command will give use the desired effect of teleportation. We need to add the following code for these additions of the player and teleportation to occur.
 
 ```mcfunction
 as @p rotated as @p run tp ~ ~ ~
@@ -153,13 +134,9 @@ execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @p rotated as 
 
 **Make sure to save your work as `tick.mcfuction` in the correct location. In the `functions` folder.
 
-Now we need to run a command that will delete the arrow once our teleportation is complete.
+Now we need to run a command that will delete the arrow once our teleportation is complete. This is done by running the `kill` command in our code. We still need to define what is being removed, and when.
 
-This is done by running the `kill` command in our code.
-We still need to define what is being removed, and when.
-
-We also need to use the *target selector* `@s` which refers to the entity executing the command (yourself).
-So on a new line of code in `tick.mcfunction` we need to add the following string of code.
+We also need to use the *target selector* `@s` which refers to the entity executing the command (yourself). So on a new line of code in `tick.mcfunction` we need to add the following string of code.
 
 ```mcfunction
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] run kill @s
@@ -187,14 +164,12 @@ We need to customise our existing code to make these changes.
 
 We need to add to the beginning of our code in the `tick.mcfunction` file.
 
-Firstly we are going to use the *scoreboard objective* and *dummy* command to track which entities (mobs) have been hit by our spectral arrow. The *dummy* command determines that section can only be changed by code/commands.
-We will call the new *sore board* objective `tpArrowHit`.
+Firstly we are going to use the *scoreboard objective* and *dummy* command to track which entities (mobs) have been hit by our spectral arrow. The *dummy* command determines that section can only be changed by code/commands. We will call the new *sore board* objective `tpArrowHit`.
 
 Our code will look like this:
 `scoreboard objectives add tpArrowHit dummy`
 
-Our next piece of code will be placed after all of code on line 4. We need to change our players location from the location of firing the arrow to the new location of the arrow.
-We will again use `execute at @e` and combine our object identifier with the new location.
+Our next piece of code will be placed after all of code on line 4. We need to change our players location from the location of firing the arrow to the new location of the arrow. We will again use `execute at @e` and combine our object identifier with the new location.
 
 It will look like this:
 `execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}]`
