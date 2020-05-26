@@ -37,11 +37,7 @@ There are two properties in the `pack` object of this file:
 
 **Copy this code into `pack.mcmeta`, using a description of your choice.**
 
-Moving forward, we need to understand *namespaces*.
-A namespace is a domain for a particular set of contents, which prevent things with the same name from interfering with each
-other. For example, if a mod adds a new type of furnace with the block ID *furnace*, Minecraft would find a conflict between
-the default furnace and our new one with the same name — and the game breaks. When we use different namespaces for the mod
-and the vanilla furnace, the blocks become *minecraft:furnace* and *mod:furnace*, which no longer conflicts.
+Moving forward, we need to understand *namespaces*. A namespace is a domain for a particular set of contents, which prevent things with the same name from interfering with each other. For example, if a mod adds a new type of furnace with the block ID *furnace*, Minecraft would find a conflict between the default furnace and our new one with the same name — and the game breaks. When we use different namespaces for the mod and the vanilla furnace, the blocks become *minecraft:furnace* and *mod:furnace*, which no longer conflicts.
 
 **In your data pack, create a new folder called `data`. In this folder, create a new folder with the name `snow_bow`.** Namespace names can only include numbers, lowercase letters, underscores and the hyphen/minus symbol. The convention for namespaces and names is `snake_case`. This means that all words are in lower case, and spaces are created with underscores.
 
