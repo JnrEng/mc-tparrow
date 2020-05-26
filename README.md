@@ -15,16 +15,8 @@ You should already be familiar with the idea of resource packs, in-game commands
 
 Just like resource packs (and behaviour packs in Bedrock Edition), data packs provide a way to customise Minecraft. Data packs can be used to override or add new advancements, functions, loot tables and more without changing any of Minecraft's code.
 
-So, to begin we need to create our world and a data pack which will be the space in which all of our code will be contained.
+Data packs are stored in a world's `datapacks` folder as either a sub-folder or a ZIP file. **Create a new Minecraft world in creative mode with cheats enabled. Open the world's `datapacks` folder, and create a new folder with a name of your choosing.** During development, it's easier to work with datapacks as a sub-folder, then package them as a ZIP to distribute once you're done.
 
-* Open Minecraft and 'Create New World' - we can call it 'Teleport' for consistency, but you can call it whatever you like.
-* The world needs to be made with `Allow Cheats: ON` & `Game Mode: Creative`.
-* `Create New World` when all of these settings have been made.
-Once the world has been created, we need to exit the world and go back to our world and access its world folder.
-* Left Click on our world - `Teleport` and then select `Edit`.
-* Select `Open World Folder`. This will open a folder list for our world.
-* We need to open the `data packs` folder which should be empty at this stage.
-* Create a new folder, by right clicking in the blank space and call it `TPArrow`.
  Once we have created the 'data pack' we need to fill it with folders to operate the Teleportation Arrow.
 * Inside `TPArrow` create a new folder called `data`.
  A data pack is identified by Minecraft with a `pack.mcmeta` file that is stored in the pack.
