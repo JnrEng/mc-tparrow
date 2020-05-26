@@ -47,6 +47,8 @@ In Minecraft, *functions* are a way to group several commands together and run t
 
 We can define new functions by creating `.mcfunction` files. **In your namespace folder (`tp_arrow`), create a new sub-folder called `functions`.** This is where we can add our functions. These follow the same naming rules for namespaces.
 
+To create a teleporting arrow, we need to tell every arrow that's landed in the ground to execute a `teleport` command whenever an arrow lands in the ground. Instead of making this work for all arrows, we're just going to give spectral arrows teleportation powers. Minecraft enables this functionality through the `execute` command. We'll build our command bit by bit.
+
 In `tick.mcfunction` we need to start typing our code. Note that functions do not use slashes at the start of commands. Type:
 
 ```mcfunction
