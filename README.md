@@ -23,7 +23,7 @@ So, to begin we need to create our world and a data pack which will be the space
 * `Create New World` when all of these settings have been made.
 Once the world has been created, we need to exit the world and go back to our world and access its world folder.
 * Left Click on our world - `Teleport` and then select `Edit`.
-* Select `Open World Folder`. This will open a folder list for our world. 
+* Select `Open World Folder`. This will open a folder list for our world.
 * We need to open the `data packs` folder which should be empty at this stage.
 * Create a new folder, by right clicking in the blank space and call it `TPArrow`.
  Once we have created the 'data pack' we need to fill it with folders to operate the Teleportation Arrow.
@@ -40,7 +40,7 @@ Once the world has been created, we need to exit the world and go back to our wo
 }
 ```
 
-**Be sure to save your progress to the correct location**
+Be sure to **save your progress to the correct location**.
 
 There are two properties within `pack.mcmeta` that warrant definition:
 
@@ -58,7 +58,7 @@ Lastly, we need to setup two more folders before we move on to part 2.
 * In `data` we need to create a new folder called `minecraft`.
 * Then, also within `data` create a new folder called `tp_arrow`. Using our namespace formula as above.
 **Now we have set up our 'data pack' to begin inputting the particulars of our mod.**
- 
+
 ## Part 2: Functions and Tags
 
 We have created the framework for our Teleportation Arrow, now we need to fill out the body of the code to tell the
@@ -67,7 +67,7 @@ program what we need it to do.
 Firstly, we will fill out the `minecraft`.
 
 * In `minecraft` we have to create a new folder named `tags`.
- *Tags* are used by Minecraft to group like things together. They can group items, blocks and more. 
+ *Tags* are used by Minecraft to group like things together. They can group items, blocks and more.
 * In `tags`, we then create a new folder called `functions`. In Minecraft, *functions* are a way to group several commands
  together and run them all at once. Instead of typing each command into the chat window or chaining them together using
  command blocks, we can write each command as a line in a text file and add them to our game using data packs.
@@ -81,7 +81,7 @@ Firstly, we will fill out the `minecraft`.
 }
 ```
 
-**Be sure to save your progress to the correct location**
+Be sure to **save your progress to the correct location**.
 
 We need to work on the contents of `tp_arrow`, so navigate back to `data` and then `tp_arrow`.
 
@@ -90,17 +90,17 @@ We need to work on the contents of `tp_arrow`, so navigate back to `data` and th
 
 ## Part 3: Coding
 
-In `tick.mcfunction` we need to start typing our code. 
+In `tick.mcfunction` we need to start typing our code.
 Note that functions do not use slashes at the start of commands.
 Type:
 
-```
+```mcfunction
 execute
 ```
 
 We want to run our command *as* a landed arrow, so we can add the `at` keyword next. **Add `at` to your command.
 
-```
+```mcfunction
 execute at
 ```
 
@@ -110,22 +110,22 @@ To do this, we use `@e`, which is a *target selector* meaning *all entities*.
 
 Add `@e` to your command.
 
-```
+```mcfunction
 execute at @e
 ```
 
-We can limit our selection by using *target selector arguments. 
-We add these inside square brackets after the selector. 
-The `type` selector can target entities like `zombie`, `ender_dragon` or `item`. 
+We can limit our selection by using *target selector arguments.
+We add these inside square brackets after the selector.
+The `type` selector can target entities like `zombie`, `ender_dragon` or `item`.
 We want to target spectral arrows. So add the following to your code.
 
-```
+```mcfunction
 [type=minecraft:spectral_arrow]
 ```
 
 Your code should look like this:
 
-```
+```mcfunction
 execute at @e[type=minecraft:spectral_arrow]
 ```
 
@@ -136,7 +136,7 @@ For arrows, the `inGround` NBT tag stores wether or not the arrow is in the grou
 
 So we need to edit our code by adding:
 
-```
+```mcfunction
 ,nbt={inGround:1b}
 ```
 
@@ -148,7 +148,7 @@ The `b` indicates that this is a *binary number*, meaning it has two values.
 
 Our code should look like this:
 
-```
+```mcfunction
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}
 ```
 
@@ -159,13 +159,13 @@ Now we want to use the *target selector* for *nearest player* which is `@p`.
 The `tp` command will give use the desired effect of teleportation.
 We need to add the following code for these additions of the player and teleportation to occur.
 
-```
+```mcfunction
 as @p rotated as @p run tp ~ ~ ~
 ```
 
 With the final result looking like this:
 
-```
+```mcfunction
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @p rotated as @p run tp ~ ~ ~
 ```
 
@@ -179,13 +179,13 @@ We still need to define what is being removed, and when.
 We also need to use the *target selector* `@s` which refers to the entity executing the command (yourself).
 So on a new line of code in `tick.mcfunction` we need to add the following string of code.
 
-```
+```mcfunction
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] run kill @s
 ```
 
 With our code looking like this:
 
-```
+```mcfunction
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @p rotated as @p run tp ~ ~ ~
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] run kill @s
 ```
@@ -198,7 +198,7 @@ You should now be able to open up your Minecraft world, `Teleport`.
 * Give yourself a `Spectral Arrow`.
 *And test your new mod. Shoot water, lava, ground and mobs to test.*
 
-## Part 4: Fixing our code 
+## Part 4: Fixing our code
 
 Now, having tested your mod, you will have noticed that it does not *teleport* when you target a mob (zombies, villagers or cows).
 We need to customise our existing code to make these changes.
@@ -212,10 +212,10 @@ Our code will look like this:
 `scoreboard objectives add tpArrowHit dummy`
 
 Our next piece of code will be placed after all of code on line 4. We need to change our players location from the location of firing the arrow to the new location of the arrow.
-We will again use `execute at @e` and combine our object identifier with the new location. 
+We will again use `execute at @e` and combine our object identifier with the new location.
 
 It will look like this:
-`execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}]` 
+`execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}]`
 
 This next line tells all entities to store their result, and update their tpArrowHit scoreboard objective if they succeed in running the command to clear the glowing effect bestowed by the spectral arrow.
 
@@ -247,4 +247,4 @@ You should now be able to open up your Minecraft world, `Teleport`.
 
 **Congratulations on completing the Teleportation Arrow!**
 
-**Make sure to save your file in the correct location and test your mod**
+Make sure to **save your file in the correct location and test your mod**.
