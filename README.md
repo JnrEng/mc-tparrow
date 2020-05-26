@@ -245,6 +245,8 @@ You should now be able to open up your Minecraft world, `Teleport`.
 
 *And test your new mod. Shoot water, lava, ground and mobs to test.*
 
+## Done
+
 **Congratulations on completing the Teleportation Arrow!**
 
 Make sure to **save your file in the correct location and test your mod**.
