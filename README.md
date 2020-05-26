@@ -1,14 +1,18 @@
 # Teleportation Arrow
+
 In this course, we will explore how we can edit the outcome of an arrow being fired from a bow. In this case to teleport the player to the location of the arrow when it lands.
 
 ## You will need:
+
 * A text editor - such as Visual Studio Code
 * A copy of Minecraft: Java Edition
 
 ## Prerequisites
+
 You should already be familiar with the idea of resource packs, in-game commands and ticks. You should also know how to navigate to your Minecraft installation's working directory.
 
 ## Part 1: Creating a Data Pack.
+
 In Minecraft: Java edition, we work with 'data packs'.  
 We will be using 'datapacks' to add content and override functions, loot tables, and much more without creating disturbances to the code of Minecraft.
 
@@ -51,6 +55,7 @@ Lastly, we need to setup two more folders before we move on to part 2.
 **Now we have set up our 'data pack' to begin inputting the particulars of our mod.**
  
 ## Part 2: Functions and Tags.
+
 We have created the framework for our Teleportation Arrow, now we need to fill out the body of the code to tell the
 program what we need it to do.
 
@@ -75,6 +80,7 @@ We need to work on the contents of `tp_arrow`, so navigate back to `data` and th
  - In our new functions folder we need to create a new file using our text editor called `tick.mcfunction`. This file will contain the majority of our code.
 
 ## Part 3: Coding.
+
 In `tick.mcfunction` we need to start typing our code. 
 Note that functions do not use slashes at the start of commands.
 Type:
@@ -163,6 +169,7 @@ You should now be able to open up your Minecraft world, `Teleport`.
 *And test your new mod. Shoot water, lava, ground and mobs to test.*
 
 ## Part 4: Fixing our code. 
+
 Now, having tested your mod, you will have noticed that it does not *teleport* when you target a mob (zombies, villagers or cows).
 We need to customise our existing code to make these changes.
 
