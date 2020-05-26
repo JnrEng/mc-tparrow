@@ -106,11 +106,7 @@ To do this, we need to add a new definition for the `tick` tag in the `minecraft
 
 **Copy this code into `pack.mcmeta`.**
 
-You should now be able to open up your Minecraft world, `Teleport`.
-
-* Give yourself a `Bow`
-* Give yourself a `Spectral Arrow`.
-*And test your new mod. Shoot water, lava, ground and mobs to test.*
+Minecraft reads our data packs once when we load a world. Any changes we make after that won't be seen until we close and re-open the world or use the `/reload` command. **Save the file, then go back to your game and type `/reload` into the chat window.** You should see the message `Reloading!` appear. **Now, try shooting a spectral arrow.**
 
 ## Part 4: Working with Mobs
 
