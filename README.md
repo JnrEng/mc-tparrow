@@ -247,5 +247,4 @@ You should now be able to open up your Minecraft world, `Teleport`.
 
 **Congratulations on completing the Teleportation Arrow!**
 
-
 **Make sure to save your file in the correct location and test your mod**
