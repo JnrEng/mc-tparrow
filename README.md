@@ -134,13 +134,10 @@ execute as @e at @s store success score @s tpArrowHit run effect clear @s minecr
 
 Now we have a list of entities, as a scoreboard objective, that contains all the entities which had the glowing effect. Remember that we told every entity to remove the glowing effect, so they won't glow anymore. Our last step will tell every entity with a score in `tpArrowHit` to teleport the nearest player to them.
 
-**In `tick.mcfunction`, add a new `execute` command**. We can target entities based on their scores using the `score` target selector argument. **Add `as @e[scores={tpArrowHit=1..100}]` to the command**.
+**In `tick.mcfunction`, add a new `execute` command**. We can target entities based on their scores using the `score` target selector argument. **Add `at @e[scores={tpArrowHit=1}]` to the command**.
 
-This will target every entity who has scores matching the list we provide (remember that entities can have scores for more than one objective). We specify the 'tpArrowHit' objective, then say `1..100`. This means 'between 1 and 100 (inclusive)'. We want the command to execute at the same location as the entity, so **add `at @s` to the command**.
+This will target every entity who has scores matching the list we provide (remember that entities can have scores for more than one objective). We specify the 'tpArrowHit' objective, then say `1`. Just like with the arrow, we want the entity to teleport the nearest player to them, so add **`as @p rotated as @p run tp ~ ~ ~` to the command**. Your command should look like this:
 
-This part "run tp ~ ~ ~" simply says to run the teleport command at the same relative position as the target that was already set, being the arrow.
-
-It will look like this:
 `execute at @e[scores={tpArrowHit=1}] as @p rotated as @p run tp ~ ~ ~`
 
 The final result in our fixed result should look like this:
