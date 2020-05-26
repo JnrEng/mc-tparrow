@@ -142,14 +142,17 @@ This will target every entity who has scores matching the list we provide (remem
 execute at @e[scores={tpArrowHit=1}] as @p rotated as @p run tp ~ ~ ~
 ```
 
-**Save your file and switch to Minecraft. Run `/reload` to load the new function then try shooting a spectral arrow at a mob.** When the arrow hits the mob, the nearest player should be teleported to the location the arrow landed at as normal.
+That's all we need to add. Your finished function file should look like this:
 
-The final result in our fixed result should look like this:
-`scoreboard objectives add tpArrowHit dummy
+```mcfunction
+scoreboard objectives add tpArrowHit dummy
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @p rotated as @p run tp ~ ~ ~
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] run kill @s
 execute as @e at @s store success score @s tpArrowHit run effect clear @s minecraft:glowing
-execute at @e[scores={tpArrowHit=1..100}] as @p rotated as @p run tp ~ ~ ~`
+execute at @e[scores={tpArrowHit=1..100}] as @p rotated as @p run tp ~ ~ ~
+```
+
+**Save your file and switch to Minecraft. Run `/reload` to load the new function then try shooting a spectral arrow at a mob.** When the arrow hits the mob, the nearest player should be teleported to the location the arrow landed at as normal.
 
 ## Done
 
