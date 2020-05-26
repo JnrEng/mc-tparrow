@@ -116,20 +116,20 @@ In this section, we'll be using scoreboards to keep track of mobs. Scoreboards a
 
 Our first step will be to make a new *objective*. Entities can gain *points* in an objective. To create a new objective, **add `scoreboard objectives add tpArrowHit dummy` to the top of `tick.mcfunction`**. This command will add a new objective called 'snowed' to our game, and make it a 'dummy' type. This means that the objective will not score anything (like monsters destroyed or blocks placed) unless we use commands to change the score. This will run every tick; if the objective already exists, Minecraft will ignore the command.
 
-Next, we'll tell every entity to attempt to remove the glowing status effect from themselves. This will be successful if they have the glowing effect, which they can receive from being hit by a spectral arrow. If they succeed, we'll tell the entity to add themselves to the 'snowed' objective. This will make it much easier to target them later.
+Next, we'll tell every entity to attempt to remove the glowing status effect from themselves. This will be successful if they have the glowing effect, which they can receive from being hit by a spectral arrow. If they succeed, we'll tell the entity to add themselves to the 'tpArrowHit' objective. This will make it much easier to target them later.
 
 We'll start with a new `execute` command. **In `tick.mcfunction`, add a new `execute` command to the end**. We want every entity to try to remove the status effect, so **add `as @e` to the command**. Each entity will try this at their own location, so **add `at @s` to the command**.
 
 The `execute` command allows us to store the result of commands we run in different places. We can do this with the `store` keyword. **Add `store` to the command**. We want to store wether or not our command is successful, so the next argument will be `success`. **Add `success` to the command**.
 
-Next, we specify where we want to store the result. In our case, we want to store it in a scoreboard objective, so **add `score` to the command**. The `score` needs a `name` and an `objective` argument. For `name`, we can use the executing entity (`@s`), and for the objective, we use `snowed`, which we created earlier. **Add `@s snowed` to the command**.
+Next, we specify where we want to store the result. In our case, we want to store it in a scoreboard objective, so **add `score` to the command**. The `score` needs a `name` and an `objective` argument. For `name`, we can use the executing entity (`@s`), and for the objective, we use `tpArrowHit`, which we created earlier. **Add `@s tpArrowHit` to the command**.
 
 Finally, we can add the command we want each entity to attempt. To remove the glowing effect, we use the same command we used to give it, but use `clear` instead of `give`. **Add `run effect clear @s minecraft:glowing` to the command**.
 
 Your command should look like this:
 
 ```mcfunction
-execute as @e at @s store success score @s snowed run effect clear @s minecraft:glowing
+execute as @e at @s store success score @s tpArrowHit run effect clear @s minecraft:glowing
 ```
 
 Our last part  will set the entity to run the command as the nearest player, and will use the `rotated as` subcommand to set the rotation to the same as the nearest playeras well. This will ensure that their rotation does not change after they have teleported.
