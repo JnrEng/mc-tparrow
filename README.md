@@ -108,7 +108,7 @@ To do this, we need to add a new definition for the `tick` tag in the `minecraft
 
 Minecraft reads our data packs once when we load a world. Any changes we make after that won't be seen until we close and re-open the world or use the `/reload` command. **Save the files, then go back to your game and type `/reload` into the chat window.** You should see the message `Reloading!` appear. **Now, try shooting a spectral arrow.** When the arrow lands, it should teleport the nearest player to the location where it landed, and then disappear.
 
-## Part 4: Working with Mobs
+## Part 4: Fixing Arrow Behaviour
 
 Now, having tested your mod, you will have noticed that it does not *teleport* when you target a mob (zombies, villagers or cows).
 We need to customise our existing code to make these changes.
