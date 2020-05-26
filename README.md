@@ -49,6 +49,8 @@ We can define new functions by creating `.mcfunction` files. **In your namespace
 
 To create a teleporting arrow, we need to tell every arrow that's landed in the ground to execute a `teleport` command whenever an arrow lands in the ground. Instead of making this work for all arrows, we're just going to give spectral arrows teleportation powers. Minecraft enables this functionality through the `execute` command. We'll build our command bit by bit.
 
+Our data pack will work by checking if there are any arrows in the ground once per *game tick*. To start, we'll make a new function in our namespace that we want to run every tick. **In the `tp_arrow` folder, create a `functions` sub-folder, and add a new file called `tick.mcfunction`.**
+
 In `tick.mcfunction` we need to start typing our code. Note that functions do not use slashes at the start of commands. Type:
 
 ```mcfunction
