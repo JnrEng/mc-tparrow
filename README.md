@@ -106,13 +106,6 @@ To do this, we need to add a new definition for the `tick` tag in the `minecraft
 
 **Copy this code into `pack.mcmeta`.**
 
-We need to work on the contents of `tp_arrow`, so navigate back to `data` and then `tp_arrow`.
-
-* Create a new folder inside `tp_arrow` called `functions`.
-* In our new functions folder we need to create a new file using our text editor called `tick.mcfunction`. This file will contain the majority of our code.
-
-**Save your work.**
-
 You should now be able to open up your Minecraft world, `Teleport`.
 
 * Give yourself a `Bow`
