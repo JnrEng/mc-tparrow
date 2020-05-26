@@ -43,6 +43,10 @@ Moving forward, we need to understand *namespaces*. A namespace is a domain for 
 
 ## Part 2: Coding
 
+In Minecraft, *functions* are a way to group several commands together and run them all at once. Instead of typing each command into the chat window or chaining them together using command blocks, we can write each command as a line in a text file and add them to our game using data packs.
+
+We can define new functions by creating `.mcfunction` files. **In your namespace folder (`tp_arrow`), create a new sub-folder called `functions`.** This is where we can add our functions. These follow the same naming rules for namespaces.
+
 In `tick.mcfunction` we need to start typing our code. Note that functions do not use slashes at the start of commands. Type:
 
 ```mcfunction
