@@ -92,10 +92,10 @@ execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @e[type=minecr
 
 We've finished our function, but we need to tell Minecraft that we want it to run every game tick. To do this, we can add our function to the built-in `tick` tag. *Tags* are used by Minecraft to group like things together. They can group items, blocks and more. Functions or commands that we list in this tag will run once every game tick.
 
-Firstly, we will fill out the `minecraft`.
+**In your data pack folder, create a new folder called `minecraft`.** Items we put in this folder wil override any built-in resources. We're going to override the `tick` tag. Any functions that are part of this tag will run once per game tick.
 
-* In `minecraft` we have to create a new folder named `tags`. *Tags* are used by Minecraft to group like things together. They can group items, blocks and more.
-* In `tags`, we then create a new folder called `functions`. In Minecraft, *functions* are a way to group several commands together and run them all at once. Instead of typing each command into the chat window or chaining them together using command blocks, we can write each command as a line in a text file and add them to our game using data packs.
+**In the `minecraft` folder, create a new folder called `tags`.** Since we're creating a function tag, **create a new folder inside this one called `functions`.**
+
 * Lastly we need to create a new File using our text editor, we will call it `tick.json`. Inside `tick.json` input the following code.
 
  ```json
