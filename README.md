@@ -110,8 +110,9 @@ Minecraft reads our data packs once when we load a world. Any changes we make af
 
 ## Part 4: Fixing Arrow Behaviour
 
-Now, having tested your mod, you will have noticed that it does not *teleport* when you target a mob (zombies, villagers or cows).
-We need to customise our existing code to make these changes.
+Our arrows work well if we shoot them at the ground or a wall, but they currently don't work if we shoot a mob directly. This is because the arrow never lands if it hits a mob — it simply gives them the `minecraft:glowing` status effect, so our function doesn't target them. Because of the unique behaviour of the arrow, however, we can use this to execute our function on mobs with the glowing status effect.
+
+In this section, we'll be using scoreboards to keep track of mobs. Scoreboards are an advanced feature of Minecraft that allow map makers to disaply information in different areas of the game, to target specific entities and store different kinds of data.
 
 We need to add to the beginning of our code in the `tick.mcfunction` file.
 
