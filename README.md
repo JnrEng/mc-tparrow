@@ -81,13 +81,7 @@ execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @p rotated as 
 
 If we used this function right now, Minecraft would telport the player every tick until the arrow despawned.  We need to make sure we remove the arrow after we've teleported the player.
 
-We also need to use the *target selector* `@s` which refers to the entity executing the command (yourself). So on a new line of code in `tick.mcfunction` we need to add the following string of code.
-
-```mcfunction
-execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] run kill @s
-```
-
-With our code looking like this:
+To do this, we can get the arrow to execute the `kill` command on the same tick. We've already written the code to select our arrow, so **copy-and-paste the command from line 1 onto a new line.** We can just change the command at the end of the line. **Remove `as @p rotated as @p run tp ~ ~ ~` from the end of the second command, and replace it with `as @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] run kill @s`.** The `as` keyword makes sure we're telling the arrow to destroy itself (instead of the player), and the `@s` selector targets the *executor* of the command — in this case, it's the arrow that we selected with the `as` keyword. Your code should look like this:
 
 ```mcfunction
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @p rotated as @p run tp ~ ~ ~
