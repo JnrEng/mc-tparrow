@@ -151,15 +151,6 @@ execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @e[type=minecr
 execute as @e at @s store success score @s tpArrowHit run effect clear @s minecraft:glowing
 execute at @e[scores={tpArrowHit=1..100}] as @p rotated as @p run tp ~ ~ ~`
 
-**Save your work.**
-
-You should now be able to open up your Minecraft world, `Teleport`.
-
-* Give yourself a `Bow`
-* Give yourself a `Spectral Arrow`.
-
-*And test your new mod. Shoot water, lava, ground and mobs to test.*
-
 ## Done
 
 That's it! You've now got an arrow that will teleport you to wherever it lands.
