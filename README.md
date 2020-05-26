@@ -79,7 +79,7 @@ Now we can add the command to execute. **Add `run tp ~ ~ ~` to your command.** T
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @p rotated as @p run tp ~ ~ ~
 ```
 
-Now we need to run a command that will delete the arrow once our teleportation is complete. This is done by running the `kill` command in our code. We still need to define what is being removed, and when.
+If we used this function right now, Minecraft would telport the player every tick until the arrow despawned.  We need to make sure we remove the arrow after we've teleported the player.
 
 We also need to use the *target selector* `@s` which refers to the entity executing the command (yourself). So on a new line of code in `tick.mcfunction` we need to add the following string of code.
 
