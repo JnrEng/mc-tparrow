@@ -23,7 +23,7 @@ So, to begin we need to create our world and a data pack which will be the space
 * `Create New World` when all of these settings have been made.
 Once the world has been created, we need to exit the world and go back to our world and access its world folder.
 * Left Click on our world - `Teleport` and then select `Edit`.
-* Select `Open World Folder`. This will open a folder list for our world. 
+* Select `Open World Folder`. This will open a folder list for our world.
 * We need to open the `data packs` folder which should be empty at this stage.
 * Create a new folder, by right clicking in the blank space and call it `TPArrow`.
  Once we have created the 'data pack' we need to fill it with folders to operate the Teleportation Arrow.
@@ -90,7 +90,7 @@ We need to work on the contents of `tp_arrow`, so navigate back to `data` and th
 
 ## Part 3: Coding
 
-In `tick.mcfunction` we need to start typing our code. 
+In `tick.mcfunction` we need to start typing our code.
 Note that functions do not use slashes at the start of commands.
 Type:
 
@@ -114,9 +114,9 @@ Add `@e` to your command.
 execute at @e
 ```
 
-We can limit our selection by using *target selector arguments. 
-We add these inside square brackets after the selector. 
-The `type` selector can target entities like `zombie`, `ender_dragon` or `item`. 
+We can limit our selection by using *target selector arguments.
+We add these inside square brackets after the selector.
+The `type` selector can target entities like `zombie`, `ender_dragon` or `item`.
 We want to target spectral arrows. So add the following to your code.
 
 ```
@@ -198,7 +198,7 @@ You should now be able to open up your Minecraft world, `Teleport`.
 * Give yourself a `Spectral Arrow`.
 *And test your new mod. Shoot water, lava, ground and mobs to test.*
 
-## Part 4: Fixing our code 
+## Part 4: Fixing our code
 
 Now, having tested your mod, you will have noticed that it does not *teleport* when you target a mob (zombies, villagers or cows).
 We need to customise our existing code to make these changes.
@@ -212,10 +212,10 @@ Our code will look like this:
 `scoreboard objectives add tpArrowHit dummy`
 
 Our next piece of code will be placed after all of code on line 4. We need to change our players location from the location of firing the arrow to the new location of the arrow.
-We will again use `execute at @e` and combine our object identifier with the new location. 
+We will again use `execute at @e` and combine our object identifier with the new location.
 
 It will look like this:
-`execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}]` 
+`execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}]`
 
 This next line tells all entities to store their result, and update their tpArrowHit scoreboard objective if they succeed in running the command to clear the glowing effect bestowed by the spectral arrow.
 
