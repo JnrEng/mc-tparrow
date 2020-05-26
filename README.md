@@ -79,8 +79,6 @@ Now we can add the command to execute. **Add `run tp ~ ~ ~` to your command.** T
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @p rotated as @p run tp ~ ~ ~
 ```
 
-**Make sure to save your work as `tick.mcfuction` in the correct location. In the `functions` folder.
-
 Now we need to run a command that will delete the arrow once our teleportation is complete. This is done by running the `kill` command in our code. We still need to define what is being removed, and when.
 
 We also need to use the *target selector* `@s` which refers to the entity executing the command (yourself). So on a new line of code in `tick.mcfunction` we need to add the following string of code.
