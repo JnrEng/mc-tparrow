@@ -39,6 +39,7 @@ Once the world has been created, we need to exit the world and go back to our wo
 	}
 }
 ```
+
 **Be sure to save your progress to the correct location**
 
 There are two properties within `pack.mcmeta` that warrant definition:
@@ -79,6 +80,7 @@ Firstly, we will fill out the `minecraft`.
 	]
 }
 ```
+
 **Be sure to save your progress to the correct location**
 
 We need to work on the contents of `tp_arrow`, so navigate back to `data` and then `tp_arrow`.
@@ -91,18 +93,23 @@ We need to work on the contents of `tp_arrow`, so navigate back to `data` and th
 In `tick.mcfunction` we need to start typing our code. 
 Note that functions do not use slashes at the start of commands.
 Type:
+
 ```
 execute
 ```
+
 We want to run our command *as* a landed arrow, so we can add the `at` keyword next. **Add `at` to your command.
+
 ```
 execute at
 ```
+
 We want to target arrows that are in the ground.
 To do this, we use `@e`, which is a *target selector* meaning *all entities*.
 'Entities' are any object in Minecraft that isn't a block. For example, items, players, and animals are all entities.
 
 Add `@e` to your command.
+
 ```
 execute at @e
 ```
@@ -111,10 +118,13 @@ We can limit our selection by using *target selector arguments.
 We add these inside square brackets after the selector. 
 The `type` selector can target entities like `zombie`, `ender_dragon` or `item`. 
 We want to target spectral arrows. So add the following to your code.
+
 ```
 [type=minecraft:spectral_arrow]
 ```
+
 Your code should look like this:
+
 ```
 execute at @e[type=minecraft:spectral_arrow]
 ```
@@ -125,9 +135,11 @@ For example, chests use NBT data to store what items they hold and the direction
 For arrows, the `inGround` NBT tag stores wether or not the arrow is in the ground.
 
 So we need to edit our code by adding:
+
 ```
 ,nbt={inGround:1b}
 ```
+
 **Make sure that this is inside the close `]`.**
 
 0 means that the arrow is in the air, while 1 means that the arrow is in the ground.
@@ -135,22 +147,28 @@ The `b` indicates that this is a *binary number*, meaning it has two values.
 *The [Minecraft Wiki](https://minecraft.gamepedia.com/) lists the NBT data for different entities and blocks.*
 
 Our code should look like this:
+
 ```
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}
 ```
+
 Now that we have identified what we are firing (`spectral_arrow`) and where it will be (`inGround`), we now need to define what will happen at that point.
 
 We used `@e` as a *target selector* for *all entities*.
 Now we want to use the *target selector* for *nearest player* which is `@p`.
 The `tp` command will give use the desired effect of teleportation.
 We need to add the following code for these additions of the player and teleportation to occur.
+
 ```
 as @p rotated as @p run tp ~ ~ ~
 ```
+
 With the final result looking like this:
+
 ```
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @p rotated as @p run tp ~ ~ ~
 ```
+
 **Make sure to save your work as `tick.mcfuction` in the correct location. In the `functions` folder.
 
 Now we need to run a command that will delete the arrow once our teleportation is complete.
@@ -160,14 +178,18 @@ We still need to define what is being removed, and when.
 
 We also need to use the *target selector* `@s` which refers to the entity executing the command (yourself).
 So on a new line of code in `tick.mcfunction` we need to add the following string of code.
+
 ```
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] run kill @s
 ```
+
 With our code looking like this:
+
 ```
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @p rotated as @p run tp ~ ~ ~
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] run kill @s
 ```
+
 **Save your work.**
 
 You should now be able to open up your Minecraft world, `Teleport`.
