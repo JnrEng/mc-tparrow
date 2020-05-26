@@ -51,49 +51,15 @@ To create a teleporting arrow, we need to tell every arrow that's landed in the 
 
 Our data pack will work by checking if there are any arrows in the ground once per *game tick*. To start, we'll make a new function in our namespace that we want to run every tick. **In the `tp_arrow` folder, create a `functions` sub-folder, and add a new file called `tick.mcfunction`.**
 
-In `tick.mcfunction` we need to start typing our code. Note that functions do not use slashes at the start of commands. Type:
+**In `tick.mcfunction`, type `execute`.** Note that functions do not use slashes at the start of commands. We want to run our command *as* a landed arrow, so we can add the `as` keyword next. **Add `as` to your command.**
 
-```mcfunction
-execute
-```
+We want to target arrows that are in the ground. To do this, we use `@e`, which is a *target selector* meaning *a*ll *e*ntities. **Add `@e` to your command.** 'Entities' are any object in Minecraft that isn't a block. For example, items, players, and animals are all entities.
 
-We want to run our command *as* a landed arrow, so we can add the `at` keyword next. **Add `at` to your command.
-
-```mcfunction
-execute at
-```
-
-We want to target arrows that are in the ground. To do this, we use `@e`, which is a *target selector* meaning *all entities*. 'Entities' are any object in Minecraft that isn't a block. For example, items, players, and animals are all entities.
-
-Add `@e` to your command.
-
-```mcfunction
-execute at @e
-```
-
-We can limit our selection by using *target selector arguments. We add these inside square brackets after the selector. The `type` selector can target entities like `zombie`, `ender_dragon` or `item`. We want to target spectral arrows. So add the following to your code.
-
-```mcfunction
-[type=minecraft:spectral_arrow]
-```
-
-Your code should look like this:
-
-```mcfunction
-execute at @e[type=minecraft:spectral_arrow]
-```
+We can limit our selection by using *target selector arguments*. We add these inside square brackets after the selector. the `type` selector can target entites like `zombie`, `ender_dragon` or `item`. We want to target spectral arrows, so **add `[type=minecraft:spectral_arrow]` right after the `@e`.**
 
 We can also look at the *NBT data* of entities. This stores extra information about the entity. For example, chests use NBT data to store what items they hold and the direction they're facing. For arrows, the `inGround` NBT tag stores wether or not the arrow is in the ground.
 
-So we need to edit our code by adding:
-
-```mcfunction
-,nbt={inGround:1b}
-```
-
-**Make sure that this is inside the close `]`.**
-
-0 means that the arrow is in the air, while 1 means that the arrow is in the ground. The `b` indicates that this is a *binary number*, meaning it has two values. *The [Minecraft Wiki](https://minecraft.gamepedia.com/) lists the NBT data for different entities and blocks.*
+We can target only these arrows by adding `nbt={inGround:1b}` to our target selector arguments, separated from the type argument by a comma. 0 means that the arrow is in the air, while 1 means that the arrow is in the ground. the `b` indicates that this is a *binary number*, meaning it has two values.  The [Minecraft Wiki](https://minecraft.gamepedia.com/) lists the NBT data for different entities and blocks. **Add `,nbt={inGround:1b}` to your command, inside the square brackets.**
 
 Our code should look like this:
 
