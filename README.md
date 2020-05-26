@@ -58,7 +58,7 @@ Lastly, we need to setup two more folders before we move on to part 2.
 * In `data` we need to create a new folder called `minecraft`.
 * Then, also within `data` create a new folder called `tp_arrow`. Using our namespace formula as above.
 **Now we have set up our 'data pack' to begin inputting the particulars of our mod.**
- 
+
 ## Part 2: Functions and Tags
 
 We have created the framework for our Teleportation Arrow, now we need to fill out the body of the code to tell the
@@ -94,13 +94,13 @@ In `tick.mcfunction` we need to start typing our code.
 Note that functions do not use slashes at the start of commands.
 Type:
 
-```
+```mcfunction
 execute
 ```
 
 We want to run our command *as* a landed arrow, so we can add the `at` keyword next. **Add `at` to your command.
 
-```
+```mcfunction
 execute at
 ```
 
@@ -110,7 +110,7 @@ To do this, we use `@e`, which is a *target selector* meaning *all entities*.
 
 Add `@e` to your command.
 
-```
+```mcfunction
 execute at @e
 ```
 
@@ -119,13 +119,13 @@ We add these inside square brackets after the selector.
 The `type` selector can target entities like `zombie`, `ender_dragon` or `item`.
 We want to target spectral arrows. So add the following to your code.
 
-```
+```mcfunction
 [type=minecraft:spectral_arrow]
 ```
 
 Your code should look like this:
 
-```
+```mcfunction
 execute at @e[type=minecraft:spectral_arrow]
 ```
 
@@ -136,7 +136,7 @@ For arrows, the `inGround` NBT tag stores wether or not the arrow is in the grou
 
 So we need to edit our code by adding:
 
-```
+```mcfunction
 ,nbt={inGround:1b}
 ```
 
@@ -148,7 +148,7 @@ The `b` indicates that this is a *binary number*, meaning it has two values.
 
 Our code should look like this:
 
-```
+```mcfunction
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}
 ```
 
@@ -159,13 +159,13 @@ Now we want to use the *target selector* for *nearest player* which is `@p`.
 The `tp` command will give use the desired effect of teleportation.
 We need to add the following code for these additions of the player and teleportation to occur.
 
-```
+```mcfunction
 as @p rotated as @p run tp ~ ~ ~
 ```
 
 With the final result looking like this:
 
-```
+```mcfunction
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @p rotated as @p run tp ~ ~ ~
 ```
 
@@ -179,13 +179,13 @@ We still need to define what is being removed, and when.
 We also need to use the *target selector* `@s` which refers to the entity executing the command (yourself).
 So on a new line of code in `tick.mcfunction` we need to add the following string of code.
 
-```
+```mcfunction
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] run kill @s
 ```
 
 With our code looking like this:
 
-```
+```mcfunction
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @p rotated as @p run tp ~ ~ ~
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] run kill @s
 ```
