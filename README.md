@@ -142,6 +142,8 @@ This will target every entity who has scores matching the list we provide (remem
 execute at @e[scores={tpArrowHit=1}] as @p rotated as @p run tp ~ ~ ~
 ```
 
+**Save your file and switch to Minecraft. Run `/reload` to load the new function then try shooting a spectral arrow at a mob.** When the arrow hits the mob, the nearest player should be teleported to the location the arrow landed at as normal.
+
 The final result in our fixed result should look like this:
 `scoreboard objectives add tpArrowHit dummy
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @p rotated as @p run tp ~ ~ ~
