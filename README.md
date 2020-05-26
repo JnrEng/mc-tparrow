@@ -94,9 +94,7 @@ We've finished our function, but we need to tell Minecraft that we want it to ru
 
 **In your data pack folder, create a new folder called `minecraft`.** Items we put in this folder wil override any built-in resources. We're going to override the `tick` tag. Any functions that are part of this tag will run once per game tick.
 
-**In the `minecraft` folder, create a new folder called `tags`.** Since we're creating a function tag, **create a new folder inside this one called `functions`.**
-
-* Lastly we need to create a new File using our text editor, we will call it `tick.json`. Inside `tick.json` input the following code.
+To do this, we need to add a new definition for the `tick` tag in the `minecraft` namespace. **In the `minecraft` folder, create a new sub-folder called `tags`, with a sub-folder in that called `functions`. Create a new file in this folder called `tick.json`.** The file follows this format:
 
  ```json
  {
