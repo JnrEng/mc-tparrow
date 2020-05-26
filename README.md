@@ -106,7 +106,7 @@ To do this, we need to add a new definition for the `tick` tag in the `minecraft
 
 **Copy this code into `pack.mcmeta`.**
 
-Minecraft reads our data packs once when we load a world. Any changes we make after that won't be seen until we close and re-open the world or use the `/reload` command. **Save the files, then go back to your game and type `/reload` into the chat window.** You should see the message `Reloading!` appear. **Now, try shooting a spectral arrow.**
+Minecraft reads our data packs once when we load a world. Any changes we make after that won't be seen until we close and re-open the world or use the `/reload` command. **Save the files, then go back to your game and type `/reload` into the chat window.** You should see the message `Reloading!` appear. **Now, try shooting a spectral arrow.** When the arrow lands, it should teleport the nearest player to the location where it landed, and then disappear.
 
 ## Part 4: Working with Mobs
 
