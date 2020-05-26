@@ -40,7 +40,7 @@ Once the world has been created, we need to exit the world and go back to our wo
 }
 ```
 
-**Be sure to save your progress to the correct location**
+Be sure to **save your progress to the correct location**.
 
 There are two properties within `pack.mcmeta` that warrant definition:
 
@@ -67,7 +67,7 @@ program what we need it to do.
 Firstly, we will fill out the `minecraft`.
 
 * In `minecraft` we have to create a new folder named `tags`.
- *Tags* are used by Minecraft to group like things together. They can group items, blocks and more. 
+ *Tags* are used by Minecraft to group like things together. They can group items, blocks and more.
 * In `tags`, we then create a new folder called `functions`. In Minecraft, *functions* are a way to group several commands
  together and run them all at once. Instead of typing each command into the chat window or chaining them together using
  command blocks, we can write each command as a line in a text file and add them to our game using data packs.
@@ -81,7 +81,7 @@ Firstly, we will fill out the `minecraft`.
 }
 ```
 
-**Be sure to save your progress to the correct location**
+Be sure to **save your progress to the correct location**.
 
 We need to work on the contents of `tp_arrow`, so navigate back to `data` and then `tp_arrow`.
 
@@ -247,4 +247,4 @@ You should now be able to open up your Minecraft world, `Teleport`.
 
 **Congratulations on completing the Teleportation Arrow!**
 
-**Make sure to save your file in the correct location and test your mod**
+Make sure to **save your file in the correct location and test your mod**.
