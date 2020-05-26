@@ -33,10 +33,10 @@ Once the world has been created, we need to exit the world and go back to our wo
 
 ```json
 {
-	"pack": {
-		"pack_format": 5,
-		"description": "Add arrows that teleport the player."
-	}
+    "pack": {
+        "pack_format": 5,
+        "description": "Add arrows that teleport the player."
+    }
 }
 ```
 
@@ -75,9 +75,9 @@ Firstly, we will fill out the `minecraft`.
 
  ```json
  {
-	"values": [
-	"tp_arrow:tick"
-	]
+    "values": [
+    "tp_arrow:tick"
+    ]
 }
 ```
 
