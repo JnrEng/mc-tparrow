@@ -13,51 +13,33 @@ You should already be familiar with the idea of resource packs, in-game commands
 
 ## Part 1: Creating a Data Pack
 
-In Minecraft: Java edition, we work with 'data packs'.  
-We will be using 'datapacks' to add content and override functions, loot tables, and much more without creating disturbances to the code of Minecraft.
+Just like resource packs (and behaviour packs in Bedrock Edition), data packs provide a way to customise Minecraft. Data packs can be used to override or add new advancements, functions, loot tables and more without changing any of Minecraft's code.
 
-So, to begin we need to create our world and a data pack which will be the space in which all of our code will be contained.
+Data packs are stored in a world's `datapacks` folder as either a sub-folder or a ZIP file. **Create a new Minecraft world in creative mode with cheats enabled. Go to your Minecraft installation's working directory, then find your world's folder inside the `saves` folder. Open the world's `datapacks` folder, and create a new folder with a name of your choosing.** This is your data pack folder. During development, it's easier to work with datapacks as a sub-folder, then package them as a ZIP to distribute once you're done.
 
-* Open Minecraft and 'Create New World' - we can call it 'Teleport' for consistency, but you can call it whatever you like.
-* The world needs to be made with `Allow Cheats: ON` & `Game Mode: Creative`.
-* `Create New World` when all of these settings have been made.
-Once the world has been created, we need to exit the world and go back to our world and access its world folder.
-* Left Click on our world - `Teleport` and then select `Edit`.
-* Select `Open World Folder`. This will open a folder list for our world.
-* We need to open the `data packs` folder which should be empty at this stage.
-* Create a new folder, by right clicking in the blank space and call it `TPArrow`.
- Once we have created the 'data pack' we need to fill it with folders to operate the Teleportation Arrow.
-* Inside `TPArrow` create a new folder called `data`.
- A data pack is identified by Minecraft with a `pack.mcmeta` file that is stored in the pack.
-* With our text editor we need to create a new file called `pack.mcmeta` inside which we need the following:
+When we're working on files in data packs, there is no need to exit your world. Just pause the game and switch to another application.
+
+Data packs are identified by Minecraft with a `pack.mcmeta` file stored in the data pack. **Create a new file in your data pack folder called `pack.mcmeta`, where `.mcemta` is the *file extension*.** This is a JSON file that contains a description and a version number. The file follows this format:
 
 ```json
 {
     "pack": {
         "pack_format": 5,
-        "description": "Add arrows that teleport the player."
+        "description": "Add arrows that teleport the player"
     }
 }
 ```
 
-Be sure to **save your progress to the correct location**.
+There are two properties in the `pack` object of this file:
 
-There are two properties within `pack.mcmeta` that warrant definition:
+* `pack_format`, which describes the version of the data pack format that the pack uses. In this course, we're using Minecraft 1.15.2, which uses data pack version 5.
+* `description`, which is displayed when hovering over the data pack's name when using the `/datapack list` command in-game.
 
-* 'pack_format: 5' describes the version of Minecraft that we are using, which for this example should be Minecraft 1.15.2.
-* 'description' merely provides an overveiw of what our code is intended for.
+**Copy this code into `pack.mcmeta`, using a description of your choice.**
 
-Moving forward, we need to understand *namespaces*.
-A namespace is a domain for a particular set of contents, which prevent things with the same name from interfering with each
-other. For example, if a mod adds a new type of furnace with the block ID *furnace*, Minecraft would find a conflict between
-the default furnace and our new one with the same name — and the game breaks. When we use different namespaces for the mod
-and the vanilla furnace, the blocks become *minecraft:furnace* and *mod:furnace*, which no longer conflicts.
+Moving forward, we need to understand *namespaces*. A namespace is a domain for a particular set of contents, which prevent things with the same name from interfering with each other. For example, if a mod adds a new type of furnace with the block ID *furnace*, Minecraft would find a conflict between the default furnace and our new one with the same name — and the game breaks. When we use different namespaces for the mod and the vanilla furnace, the blocks become *minecraft:furnace* and *mod:furnace*, which no longer conflicts.
 
-Lastly, we need to setup two more folders before we move on to part 2.
-
-* In `data` we need to create a new folder called `minecraft`.
-* Then, also within `data` create a new folder called `tp_arrow`. Using our namespace formula as above.
-**Now we have set up our 'data pack' to begin inputting the particulars of our mod.**
+**In your data pack, create a new folder called `data`. In this folder, create a new folder with the name `snow_bow`.** Namespace names can only include numbers, lowercase letters, underscores and the hyphen/minus symbol. The convention for namespaces and names is `snake_case`. This means that all words are in lower case, and spaces are created with underscores.
 
 ## Part 2: Functions and Tags
 
