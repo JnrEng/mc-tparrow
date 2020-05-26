@@ -132,7 +132,7 @@ Your command should look like this:
 execute as @e at @s store success score @s tpArrowHit run effect clear @s minecraft:glowing
 ```
 
-Now we have a list of entities, as a scoreboard objective, that contains all the entities which had the glowing effect. Remember that we told every entity to remove the glowing effect, so they won't glow anymore. Our last part  will set the entity to run the command as the nearest player, and will use the `rotated as` subcommand to set the rotation to the same as the nearest playeras well. This will ensure that their rotation does not change after they have teleported.
+Now we have a list of entities, as a scoreboard objective, that contains all the entities which had the glowing effect. Remember that we told every entity to remove the glowing effect, so they won't glow anymore. Our last step will set the entity to run the command as the nearest player, and will use the `rotated as` subcommand to set the rotation to the same as the nearest playeras well. This will ensure that their rotation does not change after they have teleported.
 
 This part "run tp ~ ~ ~" simply says to run the teleport command at the same relative position as the target that was already set, being the arrow.
 
