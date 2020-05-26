@@ -18,7 +18,7 @@ We will be using 'datapacks' to add content and override functions, loot tables,
 
 So, to begin we need to create our world and a data pack which will be the space in which all of our code will be contained.
 
-* Open Minecraft Java Edition and 'Create New World' - we can call it 'Teleport' for consistency, but you can call it whatever you like.
+* Open Minecraft and 'Create New World' - we can call it 'Teleport' for consistency, but you can call it whatever you like.
 * The world needs to be made with `Allow Cheats: ON` & `Game Mode: Creative`.
 * `Create New World` when all of these settings have been made.
 Once the world has been created, we need to exit the world and go back to our world and access its world folder.
