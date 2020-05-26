@@ -17,6 +17,7 @@ In Minecraft: Java edition, we work with 'data packs'.
 We will be using 'datapacks' to add content and override functions, loot tables, and much more without creating disturbances to the code of Minecraft.
 
 So, to begin we need to create our world and a data pack which will be the space in which all of our code will be contained.
+
  - Open Minecraft Java Edition and 'Create New World' - we can call it 'Teleport' for consistency, but you can call it whatever you like.
  - The world needs to be made with `Allow Cheats: ON` & `Game Mode: Creative`.
  - `Create New World` when all of these settings have been made.
@@ -29,6 +30,7 @@ Once the world has been created, we need to exit the world and go back to our wo
  - Inside `TPArrow` create a new folder called `data`.
  A data pack is identified by Minecraft with a `pack.mcmeta` file that is stored in the pack.
  - With our text editor we need to create a new file called `pack.mcmeta` inside which we need the following:
+
 ```json
 {
 	"pack": {
@@ -40,6 +42,7 @@ Once the world has been created, we need to exit the world and go back to our wo
 **Be sure to save your progress to the correct location**
 
 There are two properties within `pack.mcmeta` that warrant definition:
+
 * 'pack_format: 5' describes the version of Minecraft that we are using, which for this example should be Minecraft 1.15.2.
 * 'description' merely provides an overveiw of what our code is intended for.
 
@@ -50,6 +53,7 @@ the default furnace and our new one with the same name — and the game breaks. 
 and the vanilla furnace, the blocks become *minecraft:furnace* and *mod:furnace*, which no longer conflicts.
 
 Lastly, we need to setup two more folders before we move on to part 2.
+
  - In `data` we need to create a new folder called `minecraft`.
  - Then, also within `data` create a new folder called `tp_arrow`. Using our namespace formula as above.
 **Now we have set up our 'data pack' to begin inputting the particulars of our mod.**
@@ -60,12 +64,14 @@ We have created the framework for our Teleportation Arrow, now we need to fill o
 program what we need it to do.
 
 Firstly, we will fill out the `minecraft`.
+
  - In `minecraft` we have to create a new folder named `tags`.
  *Tags* are used by Minecraft to group like things together. They can group items, blocks and more. 
  - In `tags`, we then create a new folder called `functions`. In Minecraft, *functions* are a way to group several commands
  together and run them all at once. Instead of typing each command into the chat window or chaining them together using
  command blocks, we can write each command as a line in a text file and add them to our game using data packs.
  - Lastly we need to create a new File using our text editor, we will call it `tick.json`. Inside `tick.json` input the following code.
+
  ```json
  {
 	"values": [
@@ -76,6 +82,7 @@ Firstly, we will fill out the `minecraft`.
 **Be sure to save your progress to the correct location**
 
 We need to work on the contents of `tp_arrow`, so navigate back to `data` and then `tp_arrow`.
+
  - Create a new folder inside `tp_arrow` called `functions`.
  - In our new functions folder we need to create a new file using our text editor called `tick.mcfunction`. This file will contain the majority of our code.
 
@@ -164,6 +171,7 @@ execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @e[type=minecr
 **Save your work.**
 
 You should now be able to open up your Minecraft world, `Teleport`.
+
 - Give yourself a `Bow`
 - Give yourself a `Spectral Arrow`.
 *And test your new mod. Shoot water, lava, ground and mobs to test.*
@@ -209,8 +217,10 @@ execute at @e[scores={tpArrowHit=1..100}] as @p rotated as @p run tp ~ ~ ~`
 **Save your work.**
 
 You should now be able to open up your Minecraft world, `Teleport`.
+
 - Give yourself a `Bow`
 - Give yourself a `Spectral Arrow`.
+
 *And test your new mod. Shoot water, lava, ground and mobs to test.*
 
 **Congratulations on completing the Teleportation Arrow!**
