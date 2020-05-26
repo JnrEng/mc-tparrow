@@ -90,7 +90,7 @@ execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @e[type=minecr
 
 ## Part 3: Functions and Tags
 
-We have created the framework for our Teleportation Arrow, now we need to fill out the body of the code to tell the program what we need it to do.
+We've finished our function, but we need to tell Minecraft that we want it to run every game tick. To do this, we can add our function to the built-in `tick` tag. *Tags* are used by Minecraft to group like things together. They can group items, blocks and more. Functions or commands that we list in this tag will run once every game tick.
 
 Firstly, we will fill out the `minecraft`.
 
