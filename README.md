@@ -65,7 +65,7 @@ We can target only these arrows by adding `nbt={inGround:1b}` to our target sele
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}]
 ```
 
-Now that we have identified what we are firing (`spectral_arrow`) and where it will be (`inGround`), we now need to define what will happen at that point.
+We've added an `execute` command that will run at every spectral arrow that's landed in the ground. Now, we need to add the command we want to run at the spot where that arrow lands.
 
 We used `@e` as a *target selector* for *all entities*. Now we want to use the *target selector* for *nearest player* which is `@p`. The `tp` command will give use the desired effect of teleportation. We need to add the following code for these additions of the player and teleportation to occur.
 
