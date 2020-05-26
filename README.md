@@ -73,7 +73,7 @@ We used `@e` as a target selector for all entities. Now we want to use the targe
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @p rotated as @p
 ```
 
-With the final result looking like this:
+Now we can add the command to execute. **Add `run tp ~ ~ ~` to your command.** This will tell the player to *run* the `tp` (teleport) command, and teleport them to the *execution location*. We know from earlier that this location is the arrow, since we specified it with the `at` keyword. Your code should looks like this:
 
 ```mcfunction
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @p rotated as @p run tp ~ ~ ~
