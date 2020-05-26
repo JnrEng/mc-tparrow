@@ -1,4 +1,4 @@
-# Teleportation-Arrow
+# Teleportation Arrow
 In this course, we will explore how we can edit the outcome of an arrow being fired from a bow. In this case to teleport the player to the location of the arrow when it lands.
 
 ## You will need:
