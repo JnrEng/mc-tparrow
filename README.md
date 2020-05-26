@@ -17,6 +17,8 @@ Just like resource packs (and behaviour packs in Bedrock Edition), data packs pr
 
 Data packs are stored in a world's `datapacks` folder as either a sub-folder or a ZIP file. **Create a new Minecraft world in creative mode with cheats enabled. Open the world's `datapacks` folder, and create a new folder with a name of your choosing.** During development, it's easier to work with datapacks as a sub-folder, then package them as a ZIP to distribute once you're done.
 
+When we're working on files in data packs, there is no need to exit your world. Just pause the game and switch to another application.
+
  Once we have created the 'data pack' we need to fill it with folders to operate the Teleportation Arrow.
 
 * Inside `TPArrow` create a new folder called `data`.
