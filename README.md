@@ -114,22 +114,23 @@ Our arrows work well if we shoot them at the ground or a wall, but they currentl
 
 In this section, we'll be using scoreboards to keep track of mobs. Scoreboards are an advanced feature of Minecraft that allow map makers to disaply information in different areas of the game, to target specific entities and store different kinds of data.
 
-We need to add to the beginning of our code in the `tick.mcfunction` file.
+Our first step will be to make a new *objective*. Entities can gain *points* in an objective. To create a new objective, **add `scoreboard objectives add tpArrowHit dummy` to the top of `tick.mcfunction`**. This command will add a new objective called 'snowed' to our game, and make it a 'dummy' type. This means that the objective will not score anything (like monsters destroyed or blocks placed) unless we use commands to change the score. This will run every tick; if the objective already exists, Minecraft will ignore the command.
 
-Firstly we are going to use the *scoreboard objective* and *dummy* command to track which entities (mobs) have been hit by our spectral arrow. The *dummy* command determines that section can only be changed by code/commands. We will call the new *sore board* objective `tpArrowHit`.
+Next, we'll tell every entity to attempt to remove the glowing status effect from themselves. This will be successful if they have the glowing effect, which they can receive from being hit by a spectral arrow. If they succeed, we'll tell the entity to add themselves to the 'snowed' objective. This will make it much easier to target them later.
 
-Our code will look like this:
-`scoreboard objectives add tpArrowHit dummy`
+We'll start with a new `execute` command. **In `tick.mcfunction`, add a new `execute` command to the end**. We want every entity to try to remove the status effect, so **add `as @e` to the command**. Each entity will try this at their own location, so **add `at @s` to the command**.
 
-Our next piece of code will be placed after all of code on line 4. We need to change our players location from the location of firing the arrow to the new location of the arrow. We will again use `execute at @e` and combine our object identifier with the new location.
+The `execute` command allows us to store the result of commands we run in different places. We can do this with the `store` keyword. **Add `store` to the command**. We want to store wether or not our command is successful, so the next argument will be `success`. **Add `success` to the command**.
 
-It will look like this:
-`execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}]`
+Next, we specify where we want to store the result. In our case, we want to store it in a scoreboard objective, so **add `score` to the command**. The `score` needs a `name` and an `objective` argument. For `name`, we can use the executing entity (`@s`), and for the objective, we use `snowed`, which we created earlier. **Add `@s snowed` to the command**.
 
-This next line tells all entities to store their result, and update their tpArrowHit scoreboard objective if they succeed in running the command to clear the glowing effect bestowed by the spectral arrow.
+Finally, we can add the command we want each entity to attempt. To remove the glowing effect, we use the same command we used to give it, but use `clear` instead of `give`. **Add `run effect clear @s minecraft:glowing` to the command**.
 
-Our code will look like this:
-`execute as @e store success score @s tpArrowHit run effect clear @s minecraft:glowing`
+Your command should look like this:
+
+```mcfunction
+execute as @e at @s store success score @s snowed run effect clear @s minecraft:glowing
+```
 
 Our last part  will set the entity to run the command as the nearest player, and will use the `rotated as` subcommand to set the rotation to the same as the nearest playeras well. This will ensure that their rotation does not change after they have teleported.
 
