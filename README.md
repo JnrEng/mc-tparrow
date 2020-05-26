@@ -41,32 +41,7 @@ Moving forward, we need to understand *namespaces*. A namespace is a domain for 
 
 **In your data pack, create a new folder called `data`. In this folder, create a new folder with the name `snow_bow`.** Namespace names can only include numbers, lowercase letters, underscores and the hyphen/minus symbol. The convention for namespaces and names is `snake_case`. This means that all words are in lower case, and spaces are created with underscores.
 
-## Part 2: Functions and Tags
-
-We have created the framework for our Teleportation Arrow, now we need to fill out the body of the code to tell the program what we need it to do.
-
-Firstly, we will fill out the `minecraft`.
-
-* In `minecraft` we have to create a new folder named `tags`. *Tags* are used by Minecraft to group like things together. They can group items, blocks and more.
-* In `tags`, we then create a new folder called `functions`. In Minecraft, *functions* are a way to group several commands together and run them all at once. Instead of typing each command into the chat window or chaining them together using command blocks, we can write each command as a line in a text file and add them to our game using data packs.
-* Lastly we need to create a new File using our text editor, we will call it `tick.json`. Inside `tick.json` input the following code.
-
- ```json
- {
-    "values": [
-    "tp_arrow:tick"
-    ]
-}
-```
-
-Be sure to **save your progress to the correct location**.
-
-We need to work on the contents of `tp_arrow`, so navigate back to `data` and then `tp_arrow`.
-
-* Create a new folder inside `tp_arrow` called `functions`.
-* In our new functions folder we need to create a new file using our text editor called `tick.mcfunction`. This file will contain the majority of our code.
-
-## Part 3: Coding
+## Part 2: Coding
 
 In `tick.mcfunction` we need to start typing our code. Note that functions do not use slashes at the start of commands. Type:
 
@@ -156,6 +131,31 @@ You should now be able to open up your Minecraft world, `Teleport`.
 * Give yourself a `Bow`
 * Give yourself a `Spectral Arrow`.
 *And test your new mod. Shoot water, lava, ground and mobs to test.*
+
+## Part 3: Functions and Tags
+
+We have created the framework for our Teleportation Arrow, now we need to fill out the body of the code to tell the program what we need it to do.
+
+Firstly, we will fill out the `minecraft`.
+
+* In `minecraft` we have to create a new folder named `tags`. *Tags* are used by Minecraft to group like things together. They can group items, blocks and more.
+* In `tags`, we then create a new folder called `functions`. In Minecraft, *functions* are a way to group several commands together and run them all at once. Instead of typing each command into the chat window or chaining them together using command blocks, we can write each command as a line in a text file and add them to our game using data packs.
+* Lastly we need to create a new File using our text editor, we will call it `tick.json`. Inside `tick.json` input the following code.
+
+ ```json
+ {
+    "values": [
+    "tp_arrow:tick"
+    ]
+}
+```
+
+Be sure to **save your progress to the correct location**.
+
+We need to work on the contents of `tp_arrow`, so navigate back to `data` and then `tp_arrow`.
+
+* Create a new folder inside `tp_arrow` called `functions`.
+* In our new functions folder we need to create a new file using our text editor called `tick.mcfunction`. This file will contain the majority of our code.
 
 ## Part 4: Working with Mobs
 
