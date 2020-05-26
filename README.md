@@ -43,11 +43,7 @@ other. For example, if a mod adds a new type of furnace with the block ID *furna
 the default furnace and our new one with the same name — and the game breaks. When we use different namespaces for the mod
 and the vanilla furnace, the blocks become *minecraft:furnace* and *mod:furnace*, which no longer conflicts.
 
-Lastly, we need to setup two more folders before we move on to part 2.
-
-* In `data` we need to create a new folder called `minecraft`.
-* Then, also within `data` create a new folder called `tp_arrow`. Using our namespace formula as above.
-**Now we have set up our 'data pack' to begin inputting the particulars of our mod.**
+**In your data pack, create a new folder called `data`. In this folder, create a new folder with the name `snow_bow`.** Namespace names can only include numbers, lowercase letters, underscores and the hyphen/minus symbol. The convention for namespaces and names is `snake_case`. This means that all words are in lower case, and spaces are created with underscores.
 
 ## Part 2: Functions and Tags
 
