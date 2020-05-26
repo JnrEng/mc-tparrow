@@ -59,12 +59,10 @@ We can limit our selection by using *target selector arguments*. We add these in
 
 We can also look at the *NBT data* of entities. This stores extra information about the entity. For example, chests use NBT data to store what items they hold and the direction they're facing. For arrows, the `inGround` NBT tag stores wether or not the arrow is in the ground.
 
-We can target only these arrows by adding `nbt={inGround:1b}` to our target selector arguments, separated from the type argument by a comma. 0 means that the arrow is in the air, while 1 means that the arrow is in the ground. the `b` indicates that this is a *binary number*, meaning it has two values.  The [Minecraft Wiki](https://minecraft.gamepedia.com/) lists the NBT data for different entities and blocks. **Add `,nbt={inGround:1b}` to your command, inside the square brackets.**
-
-Our code should look like this:
+We can target only these arrows by adding `nbt={inGround:1b}` to our target selector arguments, separated from the type argument by a comma. 0 means that the arrow is in the air, while 1 means that the arrow is in the ground. the `b` indicates that this is a *binary number*, meaning it has two values.  The [Minecraft Wiki](https://minecraft.gamepedia.com/) lists the NBT data for different entities and blocks. **Add `,nbt={inGround:1b}` to your command, inside the square brackets.** Your code should look like this:
 
 ```mcfunction
-execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}
+execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}]
 ```
 
 Now that we have identified what we are firing (`spectral_arrow`) and where it will be (`inGround`), we now need to define what will happen at that point.
