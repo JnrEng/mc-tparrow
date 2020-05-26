@@ -138,7 +138,9 @@ Now we have a list of entities, as a scoreboard objective, that contains all the
 
 This will target every entity who has scores matching the list we provide (remember that entities can have scores for more than one objective). We specify the 'tpArrowHit' objective, then say `1`. Just like with the arrow, we want the entity to teleport the nearest player to them, so add **`as @p rotated as @p run tp ~ ~ ~` to the command**. Your command should look like this:
 
-`execute at @e[scores={tpArrowHit=1}] as @p rotated as @p run tp ~ ~ ~`
+```mcfunction
+execute at @e[scores={tpArrowHit=1}] as @p rotated as @p run tp ~ ~ ~
+```
 
 The final result in our fixed result should look like this:
 `scoreboard objectives add tpArrowHit dummy
