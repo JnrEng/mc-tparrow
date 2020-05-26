@@ -13,8 +13,7 @@ You should already be familiar with the idea of resource packs, in-game commands
 
 ## Part 1: Creating a Data Pack
 
-In Minecraft: Java edition, we work with 'data packs'.  
-We will be using 'datapacks' to add content and override functions, loot tables, and much more without creating disturbances to the code of Minecraft.
+Just like resource packs (and behaviour packs in Bedrock Edition), data packs provide a way to customise Minecraft. Data packs can be used to override or add new advancements, functions, loot tables and more without changing any of Minecraft's code.
 
 So, to begin we need to create our world and a data pack which will be the space in which all of our code will be contained.
 
