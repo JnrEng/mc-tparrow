@@ -104,7 +104,7 @@ To do this, we need to add a new definition for the `tick` tag in the `minecraft
 }
 ```
 
-Be sure to **save your progress to the correct location**.
+**Copy this code into `pack.mcmeta`.**
 
 We need to work on the contents of `tp_arrow`, so navigate back to `data` and then `tp_arrow`.
 
