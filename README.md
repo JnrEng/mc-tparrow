@@ -88,14 +88,6 @@ execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @p rotated as 
 execute at @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] as @e[type=minecraft:spectral_arrow,nbt={inGround:1b}] run kill @s
 ```
 
-**Save your work.**
-
-You should now be able to open up your Minecraft world, `Teleport`.
-
-* Give yourself a `Bow`
-* Give yourself a `Spectral Arrow`.
-*And test your new mod. Shoot water, lava, ground and mobs to test.*
-
 ## Part 3: Functions and Tags
 
 We have created the framework for our Teleportation Arrow, now we need to fill out the body of the code to tell the program what we need it to do.
@@ -120,6 +112,14 @@ We need to work on the contents of `tp_arrow`, so navigate back to `data` and th
 
 * Create a new folder inside `tp_arrow` called `functions`.
 * In our new functions folder we need to create a new file using our text editor called `tick.mcfunction`. This file will contain the majority of our code.
+
+**Save your work.**
+
+You should now be able to open up your Minecraft world, `Teleport`.
+
+* Give yourself a `Bow`
+* Give yourself a `Spectral Arrow`.
+*And test your new mod. Shoot water, lava, ground and mobs to test.*
 
 ## Part 4: Working with Mobs
 
