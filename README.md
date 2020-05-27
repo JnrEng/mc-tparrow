@@ -2,6 +2,8 @@
 
 In this course, we will explore how we can edit the outcome of an arrow being fired from a bow. In this case to teleport the player to the location of the arrow when it lands.
 
+You'll learn how to create new functions and tags, how to use scoreboards to store data and how to execute commands as other entities.
+
 ## You will need
 
 * A text editor
